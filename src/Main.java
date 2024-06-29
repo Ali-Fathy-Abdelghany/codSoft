@@ -5,7 +5,7 @@ public class Main {
     private static Scanner in = new Scanner(System.in);
 
     public static void main(String[] args) {
-        System.out.println("How many subjects do you want to enter?");
+        System.out.println("How many subjects do you want to enter? ");
         int numberOfSubjects = readPositiveInt();
         int totalMarks = calculateTotalMarks(numberOfSubjects);
         double averagePercentage = calculateAveragePercentage(totalMarks, numberOfSubjects);
