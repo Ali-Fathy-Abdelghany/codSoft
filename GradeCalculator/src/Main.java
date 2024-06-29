@@ -38,7 +38,8 @@ public class Main {
                 System.out.println("Enter subject #" + subjectNumber + " mark out of 100");
 
                 mark = in.nextInt();
-                if (mark >= 0 && mark <= 100) return mark;
+                if (mark >= 0 && mark <= 100)
+                    return mark;
                 else {
                     System.out.println("Invalid mark. Enter a number in the range from 0 to 100");
                 }
@@ -51,18 +52,30 @@ public class Main {
     }
 
     private static String determineGrade(double averagePercentage) {
-        if (averagePercentage >= 97) return "A+";
-        else if (averagePercentage >= 90) return "A";
-        else if (averagePercentage >= 85) return "A-";
-        else if (averagePercentage >= 80) return "B+";
-        else if (averagePercentage >= 75) return "B";
-        else if (averagePercentage >= 70) return "B-";
-        else if (averagePercentage >= 65) return "C+";
-        else if (averagePercentage >= 60) return "C";
-        else if (averagePercentage >= 57) return "C-";
-        else if (averagePercentage >= 53) return "D+";
-        else if (averagePercentage >= 50) return "D";
-        else return "F";
+        if (averagePercentage >= 97)
+            return "A+";
+        else if (averagePercentage >= 90)
+            return "A";
+        else if (averagePercentage >= 85)
+            return "A-";
+        else if (averagePercentage >= 80)
+            return "B+";
+        else if (averagePercentage >= 75)
+            return "B";
+        else if (averagePercentage >= 70)
+            return "B-";
+        else if (averagePercentage >= 65)
+            return "C+";
+        else if (averagePercentage >= 60)
+            return "C";
+        else if (averagePercentage >= 56)
+            return "C-";
+        else if (averagePercentage >= 53)
+            return "D+";
+        else if (averagePercentage >= 50)
+            return "D";
+        else
+            return "F";
     }
 
     private static void displayResults(int totalMarks, double averagePercentage, String grade) {
