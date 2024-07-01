@@ -13,7 +13,7 @@ public class ATM {
 
     public ATM(){bankAccount =new BankAccount();}
     public void initializeProgram() {
-        System.out.println("WELCOME BACK!");
+        System.out.println(ANSI_CYAN+"WELCOME BACK!"+ANSI_RESET);
         initializeBalance();
 
         while (true) {
