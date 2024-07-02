@@ -8,11 +8,11 @@ public class ATM {
     public static final String ANSI_GREEN = "\u001B[32m";
     public static final String ANSI_CYAN = "\u001B[36m";
     private BankAccount bankAccount;
-    private Scanner in = new Scanner(System.in);
+    private final Scanner in = new Scanner(System.in);
 
 
     public ATM(){bankAccount =new BankAccount();}
-    public void initializeProgram() {
+    public void run() {
         System.out.println(ANSI_CYAN+"WELCOME BACK!"+ANSI_RESET);
         initializeBalance();
 
