@@ -3,10 +3,10 @@ import java.util.Scanner;
 
 public class ATM {
     // color codes for coloring the output
-    public static final String ANSI_RESET = "\u001B[0m";
-    public static final String ANSI_RED = "\u001B[31m";
-    public static final String ANSI_GREEN = "\u001B[32m";
-    public static final String ANSI_CYAN = "\u001B[36m";
+    private static final String ANSI_RESET = "\u001B[0m";
+    private static final String ANSI_RED = "\u001B[31m";
+    private static final String ANSI_GREEN = "\u001B[32m";
+    private static final String ANSI_CYAN = "\u001B[36m";
     private BankAccount bankAccount;
     private final Scanner in = new Scanner(System.in);
 
