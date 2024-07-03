@@ -18,27 +18,23 @@ import java.util.Random;
 
 public class gameController {
 
+    private static int score = 0;
     @FXML
     private Label score_label;
     @FXML
     private Label hint_label;
     @FXML
     private Button reset_button;
-
     @FXML
     private TextField guess_tf;
-
     @FXML
     private Label guesses_label;
-
     @FXML
     private Label result_label;
-
     @FXML
     private Button submit_button;
     @FXML
     private Button changeDiff_button;
-    private static int score = 0;
     private Alert alert;
     private Difficulty difficulty;
     private int upperBoundary;
