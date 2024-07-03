@@ -17,15 +17,12 @@ import java.io.IOException;
 import java.util.Random;
 
 public class gameController {
-    private Stage stage;
-    private Scene scene;
-    private Parent root;
+    private static int score = 0;
     private Alert alert;
     private Difficulty difficulty;
     private int upperBoundary;
     private int targetNumber;
     private int guessesLeft;
-    private static int score = 0;
     @FXML
     private Label score_label;
     @FXML
@@ -46,6 +43,15 @@ public class gameController {
     private Button submit_button;
     @FXML
     private Button changeDiff_button;
+
+    public Difficulty getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(Difficulty difficulty) {
+        this.difficulty = difficulty;
+    }
+
     public void startGame() {
         upperBoundary = getDifficulty().upperBoundary();
         targetNumber = new Random().nextInt(upperBoundary) + 1;
@@ -59,11 +65,18 @@ public class gameController {
         hint_label.setText(getDifficulty().hintLabelMessage());
     }
 
+    void finishGame() {
+        buttonVisibality(true, false);
+        score_label.setText("Score: " + score);
+    }
+
     private void buttonVisibality(boolean value, boolean value1) {
         submit_button.setDisable(value);
         submit_button.setVisible(value1);
+
         reset_button.setDisable(value1);
         reset_button.setVisible(value);
+
         changeDiff_button.setDisable(value1);
         changeDiff_button.setVisible(value);
     }
@@ -74,17 +87,67 @@ public class gameController {
         if (guessesLeft < 2) guesses_label.setTextFill(Paint.valueOf("red"));
     }
 
-    void finishGame() {
-        buttonVisibality(true, false);
-        score_label.setText("Score: " + score);
+
+    private boolean isGuessInRange(int guess) {
+        if (guess > upperBoundary || guess < 1) {
+            result_label.setText("Please enter number in range");
+            return false;
+        }
+        return true;
+    }
+
+    private void handleIncorrectGuess(int guess) {
+        if (guessesLeft > 1) {
+            result_label.setText(guess > targetNumber ? "Too high" : "Too low");
+        } else {
+            lose();
+        }
+    }
+
+    void lose() {
+        result_label.setTextFill(Paint.valueOf("red"));
+        result_label.setText("You lost! The number was " + targetNumber);
+        //showing alert
+        alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("YOU LOST!");
+        alert.setHeaderText("Hard Luck! >_<");
+        alert.setContentText("The Number Was " + targetNumber + ".");
+        alert.showAndWait();
+        finishGame();
+    }
+
+    void win() {
+        result_label.setText("Correct!");
+        result_label.setTextFill(Paint.valueOf("#078c50"));
+        score += calculateScore();
+        //showing alert
+        alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("YOU WON!");
+        alert.setHeaderText("CONGRATS! ^_^");
+        alert.setContentText("You Guessed Correctly.");
+        alert.showAndWait();
+
+        finishGame();
+    }
+
+    private int calculateScore() {
+        return switch (guessesLeft) {
+            case 5 -> 100 * getDifficulty().scoreMultiple();
+            case 4 -> 50 * getDifficulty().scoreMultiple();
+            case 3 -> 30 * getDifficulty().scoreMultiple();
+            case 2 -> 20 * getDifficulty().scoreMultiple();
+            case 1 -> 10 * getDifficulty().scoreMultiple();
+            default -> 0;
+        };
     }
 
     @FXML
     void onSubmitButtonClicked(ActionEvent event) {
         try {
+
             int guess = Integer.parseInt(guess_tf.getText().trim());
 
-            if (!inRange(guess))
+            if (!isGuessInRange(guess))
                 return;
 
             if (guess == targetNumber)
@@ -100,75 +163,20 @@ public class gameController {
         }
     }
 
-    private boolean inRange(int guess) {
-        if (guess > upperBoundary || guess < 1) {
-            result_label.setText("Please enter number in range");
-            return false;
-        }
-        return true;
-    }
-
-    private void handleIncorrectGuess(int guess) {
-        if (guessesLeft > 1) {
-            result_label.setText(guess > targetNumber ? "Too high" : "Too low");
-        } else {
-            lose();
-        }
-    }
-    void lose() {
-        result_label.setTextFill(Paint.valueOf("red"));
-        result_label.setText("You lost! The number was " + targetNumber);
-        alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("YOU LOST!");
-        alert.setHeaderText("Hard Luck! >_<");
-        alert.setContentText("The Number Was "+targetNumber+".");
-        alert.showAndWait();
-        finishGame();
-    }
-    void win() {
-        result_label.setText("Correct!");
-        result_label.setTextFill(Paint.valueOf("#078c50"));
-        alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("YOU WON!");
-        alert.setHeaderText("CONGRATS! ^_^");
-        alert.setContentText("You Guessed Correctly.");
-        alert.showAndWait();
-        score += calculateScore();
-        finishGame();
-    }
-
-    private int calculateScore() {
-        return switch (guessesLeft) {
-            case 5 -> 100 * getDifficulty().scoreMultiple();
-            case 4 -> 50 * getDifficulty().scoreMultiple();
-            case 3 -> 30 * getDifficulty().scoreMultiple();
-            case 2 -> 20 * getDifficulty().scoreMultiple();
-            case 1 -> 10 * getDifficulty().scoreMultiple();
-            default -> 0;
-        };
-    }
-
-
-
     @FXML
     void onResetButtonClicked(ActionEvent event) {
         startGame();
     }
 
-    public Difficulty getDifficulty() {
-        return difficulty;
-    }
-
-    public void setDifficulty(Difficulty difficulty) {
-        this.difficulty = difficulty;
-    }
 
     @FXML
     void onChangeDiffButtonClicked(ActionEvent event) throws IOException {
+        //load menu scene
         FXMLLoader loader = new FXMLLoader(getClass().getResource("menu.fxml"));
-        root = loader.load();
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
+        Parent root = loader.load();
+        //Change scenes
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }

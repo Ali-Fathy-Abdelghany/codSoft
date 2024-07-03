@@ -6,54 +6,40 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class MenuController {
-    private Stage stage;
-    private Scene scene;
-    private Parent root;
 
-
-    @FXML
-    private Button easy_button;
-
-    @FXML
-    private Button hard_button;
-
-    @FXML
-    private Button medium_button;
 
     @FXML
     void onEasyButtonClicked(ActionEvent event) throws IOException {
-        Difficulty difficulty=new Difficulty();
-        difficulty.setDifficultyLevel(DifficultyLevel.Easy);
-        switchToGameScene(event,difficulty);
+        switchToGameScene(event, new Difficulty(DifficultyLevel.Easy));
     }
+
     @FXML
     void onMediumButtonClicked(ActionEvent event) throws IOException {
-        Difficulty difficulty=new Difficulty();
-        difficulty.setDifficultyLevel(DifficultyLevel.Medium);
-        switchToGameScene(event,difficulty);
+        switchToGameScene(event, new Difficulty(DifficultyLevel.Medium));
     }
+
     @FXML
     void onHardButtonClicked(ActionEvent event) throws IOException {
-        Difficulty difficulty=new Difficulty();
-        difficulty.setDifficultyLevel(DifficultyLevel.Hard);
-        switchToGameScene(event,difficulty);
+        switchToGameScene(event, new Difficulty(DifficultyLevel.Hard));
     }
-    private void switchToGameScene(ActionEvent event,Difficulty difficulty) throws IOException {
 
+    private void switchToGameScene(ActionEvent event, Difficulty difficulty) throws IOException {
+        //Load Game scene
         FXMLLoader loader = new FXMLLoader(getClass().getResource("game.fxml"));
-        root=loader.load();
-        gameController hc =loader.getController();
+        Parent root = loader.load();
+        //transferring data
+        gameController hc = loader.getController();
         hc.setDifficulty(difficulty);
         hc.startGame();
 
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
+        //Change scenes
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
