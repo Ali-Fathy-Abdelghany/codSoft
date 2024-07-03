@@ -1,9 +1,6 @@
 package application.numbergui;
 
 public class Difficulty {
-    public enum DifficultyLevel {
-        Easy,Medium,Hard
-    }
 
     private DifficultyLevel difficultyLevel;
 

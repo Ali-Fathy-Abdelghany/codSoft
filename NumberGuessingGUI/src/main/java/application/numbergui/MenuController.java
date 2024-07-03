@@ -29,19 +29,19 @@ public class MenuController {
     @FXML
     void onEasyButtonClicked(ActionEvent event) throws IOException {
         Difficulty difficulty=new Difficulty();
-        difficulty.setDifficultyLevel(Difficulty.DifficultyLevel.Easy);
+        difficulty.setDifficultyLevel(DifficultyLevel.Easy);
         switchToGameScene(event,difficulty);
     }
     @FXML
     void onMediumButtonClicked(ActionEvent event) throws IOException {
         Difficulty difficulty=new Difficulty();
-        difficulty.setDifficultyLevel(Difficulty.DifficultyLevel.Medium);
+        difficulty.setDifficultyLevel(DifficultyLevel.Medium);
         switchToGameScene(event,difficulty);
     }
     @FXML
     void onHardButtonClicked(ActionEvent event) throws IOException {
         Difficulty difficulty=new Difficulty();
-        difficulty.setDifficultyLevel(Difficulty.DifficultyLevel.Hard);
+        difficulty.setDifficultyLevel(DifficultyLevel.Hard);
         switchToGameScene(event,difficulty);
     }
     private void switchToGameScene(ActionEvent event,Difficulty difficulty) throws IOException {
