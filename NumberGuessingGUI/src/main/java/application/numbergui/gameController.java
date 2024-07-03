@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -15,15 +16,16 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Random;
 
-public class HelloController {
+public class gameController {
     private Stage stage;
     private Scene scene;
     private Parent root;
+    private Alert alert;
     private Difficulty difficulty;
     private int upperBoundary;
     private int targetNumber;
     private int guessesLeft;
-    private int score = 0;
+    private static int score = 0;
     @FXML
     private Label score_label;
     @FXML
@@ -74,7 +76,6 @@ public class HelloController {
 
     void finishGame() {
         buttonVisibality(true, false);
-        score_label.setTextFill(score >= 1000 ? Paint.valueOf("gold") : Paint.valueOf("black"));
         score_label.setText("Score: " + score);
     }
 
@@ -117,11 +118,21 @@ public class HelloController {
     void lose() {
         result_label.setTextFill(Paint.valueOf("red"));
         result_label.setText("You lost! The number was " + targetNumber);
+        alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("YOU LOST!");
+        alert.setHeaderText("Hard Luck! >_<");
+        alert.setContentText("The Number Was "+targetNumber+".");
+        alert.showAndWait();
         finishGame();
     }
     void win() {
         result_label.setText("Correct!");
-        result_label.setTextFill(Paint.valueOf("green"));
+        result_label.setTextFill(Paint.valueOf("#078c50"));
+        alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("YOU WON!");
+        alert.setHeaderText("CONGRATS! ^_^");
+        alert.setContentText("You Guessed Correctly.");
+        alert.showAndWait();
         score += calculateScore();
         finishGame();
     }

@@ -48,7 +48,7 @@ public class MenuController {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("game.fxml"));
         root=loader.load();
-        HelloController hc =loader.getController();
+        gameController hc =loader.getController();
         hc.setDifficulty(difficulty);
         hc.startGame();
 
