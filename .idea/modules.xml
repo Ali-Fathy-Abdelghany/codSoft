@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/ATM/ATM.iml" filepath="$PROJECT_DIR$/ATM/ATM.iml" />
+      <module fileurl="file://$PROJECT_DIR$/GradeCalculator/GradeCalculator.iml" filepath="$PROJECT_DIR$/GradeCalculator/GradeCalculator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/codSoft.iml" filepath="$PROJECT_DIR$/codSoft.iml" />
+    </modules>
+  </component>
+</project>
