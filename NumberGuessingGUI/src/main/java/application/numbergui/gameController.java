@@ -17,12 +17,7 @@ import java.io.IOException;
 import java.util.Random;
 
 public class gameController {
-    private static int score = 0;
-    private Alert alert;
-    private Difficulty difficulty;
-    private int upperBoundary;
-    private int targetNumber;
-    private int guessesLeft;
+
     @FXML
     private Label score_label;
     @FXML
@@ -43,6 +38,12 @@ public class gameController {
     private Button submit_button;
     @FXML
     private Button changeDiff_button;
+    private static int score = 0;
+    private Alert alert;
+    private Difficulty difficulty;
+    private int upperBoundary;
+    private int targetNumber;
+    private int guessesLeft;
 
     public Difficulty getDifficulty() {
         return difficulty;
