@@ -15,17 +15,17 @@ public class MenuController {
 
     @FXML
     void onEasyButtonClicked(ActionEvent event) throws IOException {
-        switchToGameScene(event, new Difficulty(DifficultyLevel.Easy));
+        switchToGameScene(event, new Difficulty(DifficultyLevel.EASY));
     }
 
     @FXML
     void onMediumButtonClicked(ActionEvent event) throws IOException {
-        switchToGameScene(event, new Difficulty(DifficultyLevel.Medium));
+        switchToGameScene(event, new Difficulty(DifficultyLevel.MEDIUM));
     }
 
     @FXML
     void onHardButtonClicked(ActionEvent event) throws IOException {
-        switchToGameScene(event, new Difficulty(DifficultyLevel.Hard));
+        switchToGameScene(event, new Difficulty(DifficultyLevel.HARD));
     }
 
     private void switchToGameScene(ActionEvent event, Difficulty difficulty) throws IOException {

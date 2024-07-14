@@ -21,33 +21,33 @@ public class Difficulty {
 
     public String hintLabelMessage() {
         return switch (this.getDifficultyLevel()) {
-            case Easy -> "Enter a number between 1 and 10";
-            case Medium -> " Enter a number between 1 and 50";
-            case Hard -> "Enter a number between 1 and 100";
+            case EASY -> "Enter a number between 1 and 10";
+            case MEDIUM -> " Enter a number between 1 and 50";
+            case HARD -> "Enter a number between 1 and 100";
         };
     }
 
     public int upperBoundary() {
         return switch (this.getDifficultyLevel()) {
-            case Easy -> 10;
-            case Medium -> 50;
-            case Hard -> 100;
+            case EASY -> 10;
+            case MEDIUM -> 50;
+            case HARD -> 100;
         };
     }
 
     public int scoreMultiple() {
         return switch (this.getDifficultyLevel()) {
-            case Easy -> 3;
-            case Medium -> 5;
-            case Hard -> 10;
+            case EASY -> 3;
+            case MEDIUM -> 5;
+            case HARD -> 10;
         };
     }
 
     public int maximumGuesses() {
         return switch (this.getDifficultyLevel()) {
-            case Easy -> 3;
-            case Medium -> 4;
-            case Hard -> 5;
+            case EASY -> 3;
+            case MEDIUM -> 4;
+            case HARD -> 5;
         };
     }
 
